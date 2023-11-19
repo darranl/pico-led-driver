@@ -40,7 +40,7 @@ void tlc5917_write(tlc5917_definition_t *driver_definition, uint8_t digits[], ui
 
     for (int8_t i = digit_count -1 ; i >= 0 ; i--)
     {
-        bool add_dp = dp_mask && 0x1;
+        bool add_dp = dp_mask & 0x1;
         uint8_t to_send = convert_to_pattern(digits[i], add_dp);
         spi_write_blocking(driver_definition->spi_instance, &to_send, 1);
         dp_mask = dp_mask >> 1;
